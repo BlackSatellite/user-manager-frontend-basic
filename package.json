@@ -1,0 +1,20 @@
+{
+  "name": "user-manager-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0",
+    "vite-plugin-mkcert": "^1.17.8"
+  },
+  "dependencies": {
+    "@azure/msal-browser": "^4.14.0",
+    "@azure/msal-common": "^15.8.0"
+  }
+}
