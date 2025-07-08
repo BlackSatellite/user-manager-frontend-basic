@@ -12,7 +12,7 @@ const msalConfig: Configuration = {
     // Authority: Instance + TenantId (Идентификатор каталога/клиента)
     authority: 'https://login.microsoftonline.com/e8af93f4-c5d4-430e-80c3-55493d875661',
     // URL перенаправления, должен быть зарегистрирован в Azure Portal как SPA-тип
-    redirectUri: 'https://mango-ocean-0add90903.1.azurestaticapps.net',
+    redirectUri: 'https://lively-stone-041b55503.1.azurestaticapps.net',
     // Перенаправлять на запрошенный URL после успешного входа
     navigateToLoginRequestUrl: true,
   },
