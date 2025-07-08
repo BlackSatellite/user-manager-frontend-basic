@@ -12,7 +12,7 @@ const msalConfig: Configuration = {
     // Authority: Instance + TenantId (Идентификатор каталога/клиента)
     authority: 'https://login.microsoftonline.com/e8af93f4-c5d4-430e-80c3-55493d875661',
     // URL перенаправления, должен быть зарегистрирован в Azure Portal как SPA-тип
-    redirectUri: 'https://localhost:9999',
+    redirectUri: 'https://mango-ocean-0add90903.1.azurestaticapps.net',
     // Перенаправлять на запрошенный URL после успешного входа
     navigateToLoginRequestUrl: true,
   },
@@ -178,7 +178,7 @@ async function signOut() {
 
 // --- Функции взаимодействия с API ---
 // Базовый URL вашего бэкенд API. Убедитесь, что он правильный.
-const API_BASE_URL = 'https://localhost:7216/api/Users';
+const API_BASE_URL = 'https://simpleuserapi20250708021113-e9hdfva0arhkhddk.canadacentral-01.azurewebsites.net';
 
 /**
  * Пытается получить токен доступа для API.
