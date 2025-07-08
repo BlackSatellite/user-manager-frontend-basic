@@ -3,11 +3,11 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - master # Убедитесь, что это ваша основная ветка. Если у вас 'main', измените здесь.
+      - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - master # Убедитесь, что это ваша основная ветка. Если у вас 'main', измените здесь.
+      - master
 
 jobs:
   build_and_deploy_job:
@@ -15,49 +15,36 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     permissions:
-      id-token: write # Необходим для OIDC, даже если вы используете токен развертывания
-      contents: read # Нужен для чтения содержимого репозитория
-
+       id-token: write
+       contents: read
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
-
-      # Удалены шаги "Install OIDC Client" и "Get Id Token"
-      # GitHub Actions сам обрабатывает получение токенов для Azure/static-web-apps-deploy@v1,
-      # используя secrets.AZURE_STATIC_WEB_APPS_API_TOKEN.
-      # Эти шаги обычно нужны для более сложных кастомных OIDC-сценариев.
-
+      - name: Install OIDC Client from Core Package
+        run: npm install @actions/core@1.6.0 @actions/http-client
+      - name: Get Id Token
+        uses: actions/github-script@v6
+        id: idtoken
+        with:
+           script: |
+               const coredemo = require('@actions/core')
+               return await coredemo.getIDToken()
+           result-encoding: string
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Используйте имя секрета, которое Azure автоматически сгенерировал.
-          # В вашем случае, это: AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_STONE_041B55503
-          # Если вы создавали новый SWA, имя токена может быть другим,
-          # проверьте его в Azure Portal -> Static Web App -> Deployment tokens.
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_STONE_041B55503 }}
           action: "upload"
-          
-          # Путь к вашей корневой папке фронтенд-приложения в репозитории.
-          # Если ваш Vite-проект находится в корне репозитория, используйте "/".
-          # Если он в подпапке, например, "frontend", то укажите "frontend".
-          app_location: "/" 
-          
-          # Путь к исходному коду вашего API. Оставляем пустым, т.к. API развернут отдельно.
-          api_location: "" 
-          
-          # Путь к папке со скомпилированными файлами фронтенда относительно app_location.
-          # Для Vite это обычно 'dist'.
-          output_location: "./" 
-          
-          # Позволяем Oryx (система сборки SWA) выполнить 'npm install' и 'npm run build'.
-          # Если вы хотите выполнять эти шаги вручную до этого действия, установите true.
-          skip_app_build: false 
-          
-          # Не пытаемся собрать API, так как он отдельный.
-          skip_api_build: true
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/" # App source code path
+          api_location: "" # Api source code path - optional
+          output_location: "dist" # Built app content directory - optional
+          github_id_token: ${{ steps.idtoken.outputs.result }}
+          ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -68,6 +55,4 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          # Используйте то же имя секрета для закрытия Pull Request environment
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_STONE_041B55503 }}
           action: "close"
