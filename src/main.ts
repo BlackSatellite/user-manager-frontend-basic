@@ -178,10 +178,10 @@ async function signOut() {
 
 // --- Функции взаимодействия с API ---
 // Базовый URL вашего бэкенд API. Убедитесь, что он правильный.
-const API_BASE_URL = 'https://simpleuserapi20250708021113-e9hdfva0arhkhddk.canadacentral-01.azurewebsites.net';
+const API_BASE_URL = 'https://simpleuserapi20250708021113-e9hdfva0arhkhddk.canadacentral-01.azurewebsites.net/api/Users';
 
 /**
- * Пытается получить токен доступа для API.
+ * Пытается получить токен доступа для API 404.
  * Сначала пытается получить токен бесшумно, если не удается - через перенаправление.
  * @returns Токен доступа или null, если требуется перенаправление.
  */
