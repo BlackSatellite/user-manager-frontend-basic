@@ -10,7 +10,7 @@ const msalConfig: Configuration = {
     // ИСПРАВЛЕННЫЙ ClientId (Идентификатор приложения/клиента) - проверьте, что он точно совпадает с порталом
     clientId: '5af00b78-6fae-4485-9404-d2d579df633b',
     // Authority: Instance + TenantId (Идентификатор каталога/клиента)
-    authority: 'https://login.microsoftonline.com/e8af93f4-c5d4-430e-80c3-55493d875661',
+    authority: 'https://login.microsoftonline.com/common',
     // URL перенаправления, должен быть зарегистрирован в Azure Portal как SPA-тип
     redirectUri: 'https://lively-stone-041b55503.1.azurestaticapps.net',
     // Перенаправлять на запрошенный URL после успешного входа
