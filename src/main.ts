@@ -53,7 +53,7 @@ const msalConfig: Configuration = {
 // Это "Audience", который вы настроили в appsettings.json вашего ASP.NET Core бэкенда,
 // например, "api://<ClientId вашего бэкенд-приложения>/access_as_user".
 // ИСПРАВЛЕННЫЙ ClientId в скоупе
-const apiScope = 'api://5af00b78-6fae-4485-9404-d2d579df633b/access_as_user';
+const apiScope = 'api://519ac0c2-7478-4216-a80a-e354e36a3028/access_as_user';
 const loginRequest = {
   scopes: [apiScope],
 };
